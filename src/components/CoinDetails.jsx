@@ -1,23 +1,5 @@
-import {
-  Badge,
-  Box,
-  Button,
-  Container,
-  HStack,
-  Image,
-  Progress,
-  Radio,
-  RadioGroup,
-  Stat,
-  StatArrow,
-  StatHelpText,
-  StatLabel,
-  StatNumber,
-  Text,
-  VStack,
-} from "@chakra-ui/react";
-import axios from "axios";
 import React, { useEffect, useState } from "react";
+import axios from "axios";
 import { useParams } from "react-router-dom";
 import { server } from "../index";
 import Chart from "./Chart";
@@ -72,7 +54,6 @@ const CoinDetails = () => {
         setDays("max");
         setLoading(true);
         break;
-
       default:
         setDays("24h");
         setLoading(true);
@@ -84,7 +65,6 @@ const CoinDetails = () => {
     const fetchCoin = async () => {
       try {
         const { data } = await axios.get(`${server}/coins/${params.id}`);
-
         const { data: chartData } = await axios.get(
           `${server}/coins/${params.id}/market_chart?vs_currency=${currency}&days=${days}`
         );
@@ -102,78 +82,122 @@ const CoinDetails = () => {
   if (error) return <ErrorComponent message={"Error While Fetching Coin"} />;
 
   return (
-    <Container maxW={"container.xl"}>
+    <div className="max-w-screen-xl mx-auto">
       {loading ? (
         <Loader />
       ) : (
         <>
-          <Box width={"full"} borderWidth={1}>
+          <div className="border p-4">
             <Chart arr={chartArray} currency={currencySymbol} days={days} />
-          </Box>
+          </div>
 
-          <HStack p="4" overflowX={"auto"}>
+          <div className="flex p-4 overflow-x-auto space-x-4">
             {btns.map((i) => (
-              <Button
-                disabled={days === i}
+              <button
                 key={i}
+                disabled={days === i}
                 onClick={() => switchChartStats(i)}
+                className="bg-gray-800 text-white px-4 py-2 rounded"
               >
                 {i}
-              </Button>
+              </button>
             ))}
-          </HStack>
+          </div>
 
-          <RadioGroup value={currency} onChange={setCurrency} p={"8"}>
-            <HStack spacing={"4"}>
-              <Radio value={"inr"}>INR</Radio>
-              <Radio value={"usd"}>USD</Radio>
-              <Radio value={"eur"}>EUR</Radio>
-            </HStack>
-          </RadioGroup>
+          <div className="p-8">
+            <div className="flex space-x-4">
+              <input
+                type="radio"
+                id="inr"
+                name="currency"
+                value="inr"
+                checked={currency === "inr"}
+                onChange={() => setCurrency("inr")}
+                className="form-radio"
+              />
+              <label htmlFor="inr">INR</label>
+              <input
+                type="radio"
+                id="usd"
+                name="currency"
+                value="usd"
+                checked={currency === "usd"}
+                onChange={() => setCurrency("usd")}
+                className="form-radio"
+              />
+              <label htmlFor="usd">USD</label>
+              <input
+                type="radio"
+                id="eur"
+                name="currency"
+                value="eur"
+                checked={currency === "eur"}
+                onChange={() => setCurrency("eur")}
+                className="form-radio"
+              />
+              <label htmlFor="eur">EUR</label>
+            </div>
+          </div>
 
-          <VStack spacing={"4"} p="16" alignItems={"flex-start"}>
-            <Text fontSize={"small"} alignSelf="center" opacity={0.7}>
+          <div className="p-16 space-y-4">
+            <p className="text-sm opacity-70">
               Last Updated On{" "}
-              {Date(coin.market_data.last_updated).split("G")[0]}
-            </Text>
+              {new Date(coin.market_data.last_updated).toGMTString()}
+            </p>
 
-            <Image
+            <img
               src={coin.image.large}
-              w={"16"}
-              h={"16"}
-              objectFit={"contain"}
+              className="w-16 h-16 object-contain"
+              alt="Coin"
             />
 
-            <Stat>
-              <StatLabel>{coin.name}</StatLabel>
-              <StatNumber>
-                {currencySymbol}
-                {coin.market_data.current_price[currency]}
-              </StatNumber>
-              <StatHelpText>
-                <StatArrow
-                  type={
-                    coin.market_data.price_change_percentage_24h > 0
-                      ? "increase"
-                      : "decrease"
-                  }
-                />
-                {coin.market_data.price_change_percentage_24h}%
-              </StatHelpText>
-            </Stat>
-
-            <Badge
-              fontSize={"2xl"}
-              bgColor={"blackAlpha.800"}
-              color={"white"}
-            >{`#${coin.market_cap_rank}`}</Badge>
+            <div className="space-y-2">
+              <div className="flex items-center space-x-2">
+                <span className="text-xl font-bold">{coin.name}</span>
+                <span className="text-xl font-bold">
+                  {currencySymbol}
+                  {coin.market_data.current_price[currency]}
+                </span>
+                <span className="text-sm">
+                  <span
+                    className={`${
+                      coin.market_data.price_change_percentage_24h > 0
+                        ? "text-green-500"
+                        : "text-red-500"
+                    }`}
+                  >
+                    {coin.market_data.price_change_percentage_24h}%
+                  </span>
+                  <span className="ml-1">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                      className={`${
+                        coin.market_data.price_change_percentage_24h > 0
+                          ? "text-green-500"
+                          : "text-red-500"
+                      } h-4 w-4 inline`}
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M3.243 7.758a1 1 0 0 1 0-1.414L6.586 3.93a1 1 0 0 1 1.414 0L10 6.586l2.343-2.343a1 1 0 0 1 1.414 0l3.343 3.343a1 1 0 0 1 0 1.414L13.414 14l2.343 2.343a1 1 0 0 1 0 1.414 1 1 0 0 1-1.414 0L10 13.414l-2.343 2.343a1 1 0 0 1-1.414 0L3.243 9.172a1 1 0 0 1 0-1.414z"
+                      />
+                    </svg>
+                  </span>
+                </span>
+              </div>
+              <span className="text-2xl bg-black bg-opacity-80 text-white p-2 rounded">
+                #{coin.market_cap_rank}
+              </span>
+            </div>
 
             <CustomBar
               high={`${currencySymbol}${coin.market_data.high_24h[currency]}`}
               low={`${currencySymbol}${coin.market_data.low_24h[currency]}`}
             />
 
-            <Box w={"full"} p="4">
+            <div className="w-full p-4">
               <Item title={"Max Supply"} value={coin.market_data.max_supply} />
               <Item
                 title={"Circulating Supply"}
@@ -191,32 +215,32 @@ const CoinDetails = () => {
                 title={"All Time High"}
                 value={`${currencySymbol}${coin.market_data.ath[currency]}`}
               />
-            </Box>
-          </VStack>
+            </div>
+          </div>
         </>
       )}
-    </Container>
+    </div>
   );
 };
 
 const Item = ({ title, value }) => (
-  <HStack justifyContent={"space-between"} w={"full"} my={"4"}>
-    <Text fontFamily={"Bebas Neue"} letterSpacing={"widest"}>
-      {title}
-    </Text>
-    <Text>{value}</Text>
-  </HStack>
+  <div className="flex justify-between w-full my-4">
+    <span className="font-bebas-neue tracking-widest">{title}</span>
+    <span>{value}</span>
+  </div>
 );
 
 const CustomBar = ({ high, low }) => (
-  <VStack w={"full"}>
-    <Progress value={50} colorScheme={"teal"} w={"full"} />
-    <HStack justifyContent={"space-between"} w={"full"}>
-      <Badge children={low} colorScheme={"red"} />
-      <Text fontSize={"sm"}>24H Range</Text>
-      <Badge children={high} colorScheme={"green"} />
-    </HStack>
-  </VStack>
+  <div className="w-full">
+    <div className="h-4 bg-teal-500">
+      <div className="h-full bg-teal-300" style={{ width: "50%" }}></div>
+    </div>
+    <div className="flex justify-between w-full">
+      <span className="bg-red-500 text-white px-2">{low}</span>
+      <span className="text-sm">24H Range</span>
+      <span className="bg-green-500 text-white px-2">{high}</span>
+    </div>
+  </div>
 );
 
 export default CoinDetails;

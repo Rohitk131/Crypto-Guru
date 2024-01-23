@@ -1,14 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { server } from "../index";
-import {
-  Container,
-  Heading,
-  HStack,
-  Image,
-  Text,
-  VStack,
-} from "@chakra-ui/react";
 import Loader from "./Loader";
 import ErrorComponent from "./ErrorComponent";
 
@@ -35,12 +27,12 @@ const Exchanges = () => {
     return <ErrorComponent message={"Error While Fetching Exchanges"} />;
 
   return (
-    <Container maxW={"container.xl"}>
+    <div className="max-w-screen-xl mx-auto">
       {loading ? (
         <Loader />
       ) : (
         <>
-          <HStack wrap={"wrap"} justifyContent={"space-evenly"}>
+          <div className="flex flex-wrap justify-around">
             {exchanges.map((i) => (
               <ExchangeCard
                 key={i.id}
@@ -50,42 +42,26 @@ const Exchanges = () => {
                 url={i.url}
               />
             ))}
-          </HStack>
+          </div>
         </>
       )}
-    </Container>
+    </div>
   );
 };
 
 const ExchangeCard = ({ name, img, rank, url }) => (
-  <a href={url} target={"blank"}>
-    <VStack
-      w={"52"}
-      shadow={"lg"}
-      p={"8"}
-      borderRadius={"lg"}
-      transition={"all 0.3s"}
-      m={"4"}
-      css={{
-        "&:hover": {
-          transform: "scale(1.1)",
-        },
-      }}
-    >
-      <Image
+  <a href={url} target="_blank" rel="noopener noreferrer">
+    <div className="w-52 h-52 flex flex-col items-center justify-center shadow-xl p-8 rounded-2xl transition-all duration-300 m-4 hover:shadow-2xl hover:glow transform hover:scale-110">
+      <img
         src={img}
-        w={"10"}
-        h={"10"}
-        objectFit={"contain"}
+        className="w-17 h-17 object-contain mb-2"
         alt={"Exchange"}
       />
-      <Heading size={"md"} noOfLines={1}>
-        {rank}
-      </Heading>
-
-      <Text noOfLines={1}>{name}</Text>
-    </VStack>
+      <h2 className="text-md truncate mb-2">{rank}</h2>
+      <p className="text-center truncate font-semibold text-lg">{name}</p>
+    </div>
   </a>
 );
+
 
 export default Exchanges;

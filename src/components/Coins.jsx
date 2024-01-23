@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { server } from "../index";
-import { Button, Container, HStack, Radio, RadioGroup } from "@chakra-ui/react";
 import Loader from "./Loader";
 import ErrorComponent from "./ErrorComponent";
 import CoinCard from "./CoinCard";
@@ -42,20 +41,47 @@ const Coins = () => {
   if (error) return <ErrorComponent message={"Error While Fetching Coins"} />;
 
   return (
-    <Container maxW={"container.xl"}>
+    <div className="max-w-screen-xl mx-auto">
       {loading ? (
         <Loader />
       ) : (
         <>
-          <RadioGroup value={currency} onChange={setCurrency} p={"8"}>
-            <HStack spacing={"4"}>
-              <Radio value={"inr"}>INR</Radio>
-              <Radio value={"usd"}>USD</Radio>
-              <Radio value={"eur"}>EUR</Radio>
-            </HStack>
-          </RadioGroup>
+          <div className="p-8">
+            <div className="flex space-x-4">
+              <input
+                type="radio"
+                id="inr"
+                name="currency"
+                value="inr"
+                checked={currency === "inr"}
+                onChange={() => setCurrency("inr")}
+                className="form-radio"
+              />
+              <label htmlFor="inr">INR</label>
+              <input
+                type="radio"
+                id="usd"
+                name="currency"
+                value="usd"
+                checked={currency === "usd"}
+                onChange={() => setCurrency("usd")}
+                className="form-radio"
+              />
+              <label htmlFor="usd">USD</label>
+              <input
+                type="radio"
+                id="eur"
+                name="currency"
+                value="eur"
+                checked={currency === "eur"}
+                onChange={() => setCurrency("eur")}
+                className="form-radio"
+              />
+              <label htmlFor="eur">EUR</label>
+            </div>
+          </div>
 
-          <HStack wrap={"wrap"} justifyContent={"space-evenly"}>
+          <div className="flex flex-wrap justify-evenly">
             {coins.map((i) => (
               <CoinCard
                 id={i.id}
@@ -67,23 +93,22 @@ const Coins = () => {
                 currencySymbol={currencySymbol}
               />
             ))}
-          </HStack>
+          </div>
 
-          <HStack w={"full"} overflowX={"auto"} p={"8"}>
+          <div className="w-full overflow-x-auto p-8 flex">
             {btns.map((item, index) => (
-              <Button
+              <button
                 key={index}
-                bgColor={"blackAlpha.900"}
-                color={"white"}
+                className="bg-black bg-opacity-90 text-white px-4 py-2 rounded"
                 onClick={() => changePage(index + 1)}
               >
                 {index + 1}
-              </Button>
+              </button>
             ))}
-          </HStack>
+          </div>
         </>
       )}
-    </Container>
+    </div>
   );
 };
 
