@@ -16,7 +16,7 @@ const Trending = () => {
     <div className="container mx-auto mt-8">
       <h1 className="text-4xl font-bold mb-4">Explore all <span className='bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-red-500'>Trending Cryptocurrencies</span></h1>
       {trendingCryptos.map((crypto, index) => (
-        <div key={crypto.item.id} className="bg-white p-4 rounded shadow-md mb-4 flex items-center">
+        <div key={crypto.item.id} className="bg-white p-4 rounded-2xl shadow-2xl mb-4 flex items-center transition-transform transform hover:scale-105">
           <span className="text-xl font-semibold mr-2">{index + 1}.</span>
           <img src={crypto.item.small} alt={crypto.item.name} className="w-10 h-10 mr-2 rounded-full" />
           <div>
