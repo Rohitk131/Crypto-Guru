@@ -1,5 +1,5 @@
 import React from "react";
-
+import Newslatter from './NewsLatter';
 const HeroSection = () => {
   return (
     <div className="max-w-[85rem] mx-auto px-4 sm:px-4 mt-16 lg:px-10">
@@ -115,6 +115,7 @@ const HeroSection = () => {
           />
         </div>
       </div>
+      <Newslatter />
       {/* End Grid */}
     </div>
   );

@@ -10,8 +10,6 @@ Welcome to CryptoGuru, your go-to source for comprehensive cryptocurrency inform
 - [Getting Started](#getting-started)
 - [Usage](#usage)
 - [Deployment](#deployment)
-- [Contributing](#contributing)
-- [License](#license)
 
 ## Introduction
 
