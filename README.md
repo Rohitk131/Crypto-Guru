@@ -62,14 +62,6 @@ Explore the world of cryptocurrencies using CryptoGuru by visiting our deployed 
 
 The CryptoGuru front-end is deployed on [Vercel](https://vercel.com/). Visit our live website at [http://cryptoguru.vercel.app](http://cryptoguru.vercel.app).
 
-## Contributing
-
-We welcome contributions! If you'd like to contribute to CryptoGuru, please follow our [Contribution Guidelines](CONTRIBUTING.md).
-
-## License
-
-This project is licensed under the [MIT License](LICENSE).
-
 ---
 
 Thank you for using CryptoGuru! If you have any questions or feedback, feel free to reach out to us. Happy exploring! 🚀
