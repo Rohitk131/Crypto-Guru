@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 const Header = () => {
   return (
-    <nav className="bg-white border-gray-200 dark:bg-gray-900">
+    <nav className="bg-white border-gray-200 dark:bg-gray-900 rounded-b-lg">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
         <Link to="https://flowbite.com/" className="flex items-center space-x-3 rtl:space-x-reverse">
           <img src="https://flowbite.com/docs/images/logo.svg" className="h-8" alt="Flowbite Logo" />
