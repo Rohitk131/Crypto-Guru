@@ -9,9 +9,9 @@ const ErrorComponent = ({ message }) => {
       bottom={"4"}
       left={"50%"}
       transform={"translateX(-50%)"}
-      w={"container.lg"}
+      w={"max-content"}
     >
-      <AlertIcon />
+      <AlertIcon className="w-10 mr-2"/>
       {message}
     </Alert>
   );
