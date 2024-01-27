@@ -2,7 +2,7 @@ import React from "react";
 import Newslatter from './NewsLatter';
 const HeroSection = () => {
   return (
-    <div className="max-w-[85rem] mx-auto px-4 sm:px-4 mt-16 lg:px-10">
+    <div className="max-w-[85rem] mx-auto px-4 sm:px-4 mt-16 max-md:mt-5 lg:px-10">
       <div className="grid md:grid-cols-2 gap-4 md:gap-8 xl:gap-20 md:items-center">
         <div>
           <h1 className="block text-3xl font-bold text-slate-800 sm:text-4xl lg:text-6xl lg:leading-tight ">

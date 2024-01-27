@@ -1,12 +1,15 @@
-import React from 'react';
+import React, {useState } from 'react';
 import { Link } from 'react-router-dom';
 import Search from './Search';
 
 const Header = () => {
+  const [openMenu , setMenuState] = useState(false);
+  const [url , setUrl] = useState(window.location.pathname);
+   
   return (
     <nav className="bg-white border-gray-200 dark:bg-gray-900 rounded-b-lg">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-        <Link to="https://flowbite.com/" className="flex items-center space-x-3 rtl:space-x-reverse">
+        <Link to="/" onClick={()=>{setUrl("/")}} className="flex items-center space-x-3 rtl:space-x-reverse">
           <img src="https://flowbite.com/docs/images/logo.svg" className="h-8" alt="Flowbite Logo" />
           <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
             CryptoGuru
@@ -29,8 +32,8 @@ const Header = () => {
             >
               <path
                 stroke="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
+                strokeLinecap="round"
+                strokeLinejoin="round"
                 strokeWidth="2"
                 d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
               />
@@ -44,6 +47,7 @@ const Header = () => {
             className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
             aria-controls="navbar-search"
             aria-expanded="false"
+            onClick={()=>{setMenuState(!openMenu)}}
           >
             <span className="sr-only">Open main menu</span>
             <svg
@@ -53,27 +57,28 @@ const Header = () => {
               fill="none"
               viewBox="0 0 17 14"
             >
-              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" strokeWidth="2" d="M1 1h15M1 7h15M1 13h15"/>
+              <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M1 1h15M1 7h15M1 13h15"/>
             </svg>
           </button>
         </div>
-        <div className="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-search">
-          <ul className="flex space-x-6">
-            <li>
-              <Link to="/" className="text-gray-900 hover:text-blue-700 dark:text-white dark:hover:text-blue-500">
+        <div className={`items-center justify-between max-md:h ${openMenu ? "flex-row animate-swipe-down" : "hidden"} w-full md:flex md:w-auto md:order-1" id="navbar-search`}>
+          <ul className="flex flex-col space-x-6 max-md:space-y-2 md:flex-row max-md:mt-10 max-md:mx-5 max-md:space-x-0 max-md:text-xl">
+            <li className='flex justify-center'>
+              <Link to="/" onClick={()=>{setUrl("/")}} className= {` ${url === "/" ? "text-blue-700" : "text-gray-900"} hover:text-blue-700 dark:text-white dark:hover:text-blue-50`}>
                 Home
               </Link>
             </li>
-            <li>
+            <li className='flex justify-center'>
               <Link
                 to="/exchanges"
-                className="text-gray-900 hover:text-blue-700 dark:text-white dark:hover:text-blue-500"
+                onClick={()=>{setUrl("/exchanges")}}
+                className={`${url === "/exchanges" ? "text-blue-700" : "text-gray-900 "} hover:text-blue-700 dark:text-white dark:hover:text-blue-500`}
               >
                 Exchanges
               </Link>
             </li>
-            <li>
-              <Link to="/coins" className="text-gray-900 hover:text-blue-700 dark:text-white dark:hover:text-blue-500">
+            <li className='flex justify-center'>
+              <Link to="/coins" onClick={()=>{setUrl("/coins")}} className={` ${url === "/coins" ? "text-blue-700" : "text-gray-900"} hover:text-blue-700 dark:text-white dark:hover:text-blue-500`}>
                 Coins
               </Link>
             </li>
