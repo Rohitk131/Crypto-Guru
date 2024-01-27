@@ -58,7 +58,7 @@ const ExchangeCard = ({ name, img, rank, url }) => (
         alt={"Exchange"}
       />
       <h2 className="text-md truncate mb-2">{rank}</h2>
-      <p className="text-center truncate font-semibold text-lg">{name}</p>
+      <p className="text-center truncate font-semibold text-lg whitespace-normal">{name}</p>
     </div>
   </a>
 );

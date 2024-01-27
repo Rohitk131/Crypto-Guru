@@ -5,11 +5,13 @@ const ErrorComponent = ({ message }) => {
   return (
     <Alert
       status="error"
-      position={"fixed"}
+      position={"relative"}
       bottom={"4"}
       left={"50%"}
       transform={"translateX(-50%)"}
-      w={"max-content"}
+      w={"100%"}
+      h={"50vh"}
+      justifyContent={"center"}
     >
       <AlertIcon className="w-10 mr-2"/>
       {message}

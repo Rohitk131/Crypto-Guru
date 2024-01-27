@@ -99,7 +99,7 @@ const Coins = () => {
             {btns.map((item, index) => (
               <button
                 key={index}
-                className="bg-black bg-opacity-90 text-white px-4 py-2 rounded"
+                className="bg-black bg-opacity-90 text-white px-4 py-2 mx-1 rounded"
                 onClick={() => changePage(index + 1)}
               >
                 {index + 1}

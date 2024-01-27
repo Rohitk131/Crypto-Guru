@@ -1,20 +1,20 @@
-import React, { useState, useEffect } from 'react';
+// import React, { useState, useEffect } from 'react';
 
 function Search(){
-    useEffect(()=>{
-        fetch('https://pro-api.coingecko.com/api/v3/coins/list')
-        .then(res=>res.json())
-        .then(data=>{
-            console.log(data);
-        })
-        .catch(err=>console.log(err));
-    },[])
-    const [data, setData] = useState([])
-    const [filterData, setFilterData] = useState([])
-    const handleFilter = (value)=>{
-        const res = filterData.filter(f=>f.name.toLowerCase().includes(value))
-        setData(res);
-    }
+    // useEffect(()=>{
+    //     fetch('https://pro-api.coingecko.com/api/v3/coins/list')
+    //     .then(res=>res.json())
+    //     .then(data=>{
+    //         console.log(data);
+    //     })
+    //     .catch(err=>console.log(err));
+    // },[])
+    // const [data, setData] = useState([])
+    // const [filterData, setFilterData] = useState([])
+    // const handleFilter = (value)=>{
+    //     const res = filterData.filter(f=>f.name.toLowerCase().includes(value))
+    //     setData(res);
+    // }
 
     return(
         <div className="relative hidden md:block">
@@ -28,8 +28,8 @@ function Search(){
               >
                 <path
                   stroke="currentColor"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                   strokeWidth="2"
                   d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
                 />
